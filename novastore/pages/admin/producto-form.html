@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nuevo producto · Admin | NovaStore</title>
+  <link rel="icon" type="image/png" href="../../assets/img/marca/logo.png">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../../css/variables.css">
+  <link rel="stylesheet" href="../../css/brand-overrides.css">
+  <link rel="stylesheet" href="../../css/forms.css">
+  <link rel="stylesheet" href="../../css/tienda.css">
+  <link rel="stylesheet" href="../../css/admin.css">
+  <link rel="stylesheet" href="../../css/responsive.css">
+</head>
+<body>
+
+  <script>
+    window.RUTA_ASSETS_BASE = '../../assets/img/';
+    window.RUTA_TIENDA_BASE = '../../pages/tienda/';
+    window.RUTA_ADMIN_BASE = '../../pages/admin/';
+  </script>
+
+  <div class="layout-admin">
+    <nav class="admin-sidebar offcanvas-lg offcanvas-start" tabindex="-1" id="menuAdmin"
+      aria-label="Menú del administrador">
+      <div class="offcanvas-header d-lg-none">
+        <span class="fw-bold">Menú</span>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
+          data-bs-target="#menuAdmin" aria-label="Cerrar menú"></button>
+      </div>
+
+      <div class="offcanvas-body d-flex flex-column">
+        <a href="home.html" class="d-block mb-4">
+          <img src="../../assets/img/marca/logo-blanco.png" alt="NovaStore" style="height:44px;width:auto;">
+        </a>
+
+        <ul class="admin-sidebar__lista" data-menu-admin></ul>
+
+        <div class="mt-auto pt-4">
+          <p class="mb-2" data-usuario-admin></p>
+          <a href="../../index.html" class="d-block small mb-2">Ver la tienda</a>
+          <button type="button" class="btn btn-outline-light btn-sm w-100" data-salir>Cerrar sesión</button>
+        </div>
+      </div>
+    </nav>
+
+    <div class="admin-contenido">
+      <button class="btn btn-dark d-lg-none mb-3" type="button" data-bs-toggle="offcanvas"
+        data-bs-target="#menuAdmin" aria-controls="menuAdmin">&#9776; Menú</button>
+
+      <div class="admin-topbar">
+        <div>
+          <h1 class="h3 mb-1" data-titulo>Nuevo producto</h1>
+          <p class="mb-0 small">Los campos marcados con * son obligatorios.</p>
+        </div>
+        <a href="productos.html" class="btn btn-outline-primary">Volver al listado</a>
+      </div>
+
+      <div class="alert alert-danger d-none" data-error-form></div>
+
+      <div class="card border-0 shadow-sm">
+        <div class="card-body">
+          <form class="formulario formulario--ancho" id="formProducto" novalidate>
+            <input type="hidden" id="id">
+
+            <div class="formulario__fila">
+              <div class="campo">
+                <label class="campo__label" for="codigo">Código del producto *</label>
+                <input class="campo__input" type="text" id="codigo" required>
+                <span class="campo__ayuda">Texto, mínimo 3 caracteres.</span>
+                <span class="campo__error"></span>
+              </div>
+              <div class="campo">
+                <label class="campo__label" for="categoria">Categoría *</label>
+                <select class="campo__input" id="categoria" required></select>
+                <span class="campo__error"></span>
+              </div>
+            </div>
+
+            <div class="campo">
+              <label class="campo__label" for="nombre">Nombre *</label>
+              <input class="campo__input" type="text" id="nombre" maxlength="100" required>
+              <span class="campo__ayuda">Máximo 100 caracteres.</span>
+              <span class="campo__error"></span>
+            </div>
+
+            <div class="campo">
+              <label class="campo__label" for="descripcion">Descripción</label>
+              <textarea class="campo__input" id="descripcion" maxlength="500"></textarea>
+              <span class="campo__ayuda">Opcional. Máximo 500 caracteres.</span>
+              <span class="campo__error"></span>
+            </div>
+
+            <div class="formulario__fila">
+              <div class="campo">
+                <label class="campo__label" for="precio">Precio *</label>
+                <input class="campo__input" type="number" id="precio" min="0" step="0.01" required>
+                <span class="campo__ayuda">Mínimo 0. Con 0 el producto se muestra como gratis.</span>
+                <span class="campo__error"></span>
+              </div>
+              <div class="campo">
+                <label class="campo__label" for="stock">Stock *</label>
+                <input class="campo__input" type="number" id="stock" min="0" step="1" required>
+                <span class="campo__ayuda">Solo números enteros, mínimo 0.</span>
+                <span class="campo__error"></span>
+              </div>
+            </div>
+
+            <div class="campo">
+              <label class="campo__label" for="stockCritico">Stock crítico</label>
+              <input class="campo__input" type="number" id="stockCritico" min="0" step="1">
+              <span class="campo__ayuda">Opcional. Avisa cuando el stock llegue a este número.</span>
+              <span class="campo__error"></span>
+            </div>
+
+            <div class="campo">
+              <label class="campo__label" for="imagen">Imagen</label>
+              <select class="campo__input" id="imagen"></select>
+              <span class="campo__ayuda">Opcional. Elige la ilustración que representa al producto.</span>
+              <span class="campo__error"></span>
+            </div>
+
+            <div class="campo">
+              <span class="campo__label">Vista previa</span>
+              <img src="" alt="Vista previa del producto" class="admin-previsualizacion" data-preview>
+            </div>
+
+            <div class="d-flex flex-wrap gap-2">
+              <button type="submit" class="btn btn-primary">Guardar producto</button>
+              <a href="productos.html" class="btn btn-outline-primary">Cancelar</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../../js/data/productos.js"></script>
+  <script src="../../js/data/regiones.js"></script>
+  <script src="../../js/data/blogs.js"></script>
+  <script src="../../js/utils/storage.js"></script>
+  <script src="../../js/utils/validaciones.js"></script>
+  <script src="../../js/utils/auth.js"></script>
+  <script src="../../js/utils/carrito.js"></script>
+  <script src="../../js/utils/ordenes.js"></script>
+  <script src="../../js/components/render-productos.js"></script>
+  <script src="../../js/components/admin-menu.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      inicializarProductos();
+      inicializarUsuarios();
+      Auth.protegerVistaAdmin();
+      Auth.protegerSoloAdministrador();
+      pintarMenuAdmin('productos');
+      aplicarPermisosEscritura();
+    });
+  </script>
+  <script>
+    const IMAGENES_DISPONIBLES = [
+      { valor: 'productos/audifonos-nova-pulse.svg', texto: 'Audífonos' },
+      { valor: 'productos/parlante-orbe-mini.svg', texto: 'Parlante' },
+      { valor: 'productos/mouse-flux.svg', texto: 'Mouse' },
+      { valor: 'productos/teclado-cascade.svg', texto: 'Teclado' },
+      { valor: 'productos/lampara-halo.svg', texto: 'Lámpara' },
+      { valor: 'productos/enchufe-nexo.svg', texto: 'Enchufe inteligente' },
+      { valor: 'productos/control-vortex-pro.svg', texto: 'Control gamer' },
+      { valor: 'productos/silla-apex.svg', texto: 'Silla gamer' },
+      { valor: 'productos/smartwatch-pulse-fit.svg', texto: 'Smartwatch' },
+      { valor: 'productos/pulsera-bandy.svg', texto: 'Pulsera fitness' }
+    ];
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const categoria = document.getElementById('categoria');
+      const imagen = document.getElementById('imagen');
+      const preview = document.querySelector('[data-preview]');
+      const error = document.querySelector('[data-error-form]');
+
+      categoria.innerHTML = '<option value="">Selecciona una categoría</option>'
+        + CATEGORIAS.map((cat) => `<option value="${cat.id}">${cat.nombre}</option>`).join('');
+
+      imagen.innerHTML = IMAGENES_DISPONIBLES
+        .map((img) => `<option value="${img.valor}">${img.texto}</option>`).join('');
+
+      function refrescarPreview() {
+        preview.src = '../../assets/img/' + imagen.value;
+      }
+      imagen.addEventListener('change', refrescarPreview);
+      refrescarPreview();
+
+      const campos = {
+        codigo: document.getElementById('codigo'),
+        nombre: document.getElementById('nombre'),
+        descripcion: document.getElementById('descripcion'),
+        precio: document.getElementById('precio'),
+        stock: document.getElementById('stock'),
+        stockCritico: document.getElementById('stockCritico')
+      };
+
+      const reglas = {
+        codigo: [
+          { test: esRequerido, mensaje: 'El código es obligatorio.' },
+          { test: (valor) => tieneLargoMinimo(valor, 3), mensaje: 'Mínimo 3 caracteres.' }
+        ],
+        nombre: [
+          { test: esRequerido, mensaje: 'El nombre es obligatorio.' },
+          { test: (valor) => tieneLargoMaximo(valor, 100), mensaje: 'Máximo 100 caracteres.' }
+        ],
+        descripcion: [
+          { test: (valor) => tieneLargoMaximo(valor, 500), mensaje: 'Máximo 500 caracteres.' }
+        ],
+        precio: [
+          { test: esRequerido, mensaje: 'El precio es obligatorio.' },
+          { test: esNumeroDecimalValido, mensaje: 'Usa solo números.' },
+          { test: (valor) => Number(valor) >= 0, mensaje: 'El precio no puede ser negativo.' }
+        ],
+        stock: [
+          { test: esRequerido, mensaje: 'El stock es obligatorio.' },
+          { test: esNumeroEntero, mensaje: 'Debe ser un número entero.' },
+          { test: (valor) => Number(valor) >= 0, mensaje: 'El stock no puede ser negativo.' }
+        ],
+        stockCritico: [
+          { test: (valor) => !esRequerido(valor) || esNumeroEntero(valor), mensaje: 'Debe ser un número entero.' },
+          { test: (valor) => !esRequerido(valor) || Number(valor) >= 0, mensaje: 'No puede ser negativo.' }
+        ]
+      };
+
+      Object.keys(campos).forEach((clave) => {
+        campos[clave].addEventListener('blur', () => validarCampo(campos[clave], reglas[clave]));
+        campos[clave].addEventListener('input', () => {
+          if (campos[clave].classList.contains('campo__input--error')) {
+            validarCampo(campos[clave], reglas[clave]);
+          }
+        });
+      });
+
+      const idBuscado = new URLSearchParams(window.location.search).get('id');
+      if (idBuscado) {
+        const producto = Storage.obtener(STORAGE_KEYS.PRODUCTOS, PRODUCTOS)
+          .find((item) => item.id === idBuscado);
+        if (producto) {
+          document.querySelector('[data-titulo]').textContent = 'Editar producto';
+          document.title = 'Editar producto | NovaStore';
+          document.getElementById('id').value = producto.id;
+          campos.codigo.value = producto.codigo;
+          campos.nombre.value = producto.nombre;
+          campos.descripcion.value = producto.descripcion || '';
+          campos.precio.value = producto.precio;
+          campos.stock.value = producto.stock;
+          campos.stockCritico.value = producto.stockCritico ?? '';
+          categoria.value = producto.categoria;
+          imagen.value = producto.imagen;
+          refrescarPreview();
+        }
+      }
+
+      document.getElementById('formProducto').addEventListener('submit', (evento) => {
+        evento.preventDefault();
+        error.classList.add('d-none');
+
+        const valido = Object.keys(campos)
+          .map((clave) => validarCampo(campos[clave], reglas[clave]))
+          .every(Boolean);
+
+        if (!categoria.value) {
+          error.textContent = 'Selecciona una categoría para el producto.';
+          error.classList.remove('d-none');
+          return;
+        }
+        if (!valido) return;
+
+        const productos = Storage.obtener(STORAGE_KEYS.PRODUCTOS, PRODUCTOS);
+        const id = document.getElementById('id').value;
+
+        const codigoRepetido = productos.some((item) =>
+          item.codigo.toLowerCase() === campos.codigo.value.trim().toLowerCase() && item.id !== id);
+        if (codigoRepetido) {
+          error.textContent = 'Ya existe otro producto con ese código.';
+          error.classList.remove('d-none');
+          return;
+        }
+
+        const datos = {
+          codigo: campos.codigo.value.trim().toUpperCase(),
+          nombre: campos.nombre.value.trim(),
+          descripcion: campos.descripcion.value.trim(),
+          precio: Number(campos.precio.value),
+          stock: Number(campos.stock.value),
+          stockCritico: campos.stockCritico.value === '' ? null : Number(campos.stockCritico.value),
+          categoria: categoria.value,
+          imagen: imagen.value
+        };
+
+        if (id) {
+          const indice = productos.findIndex((item) => item.id === id);
+          productos[indice] = Object.assign({}, productos[indice], datos);
+        } else {
+          productos.push(Object.assign({ id: 'P' + Date.now().toString().slice(-6) }, datos));
+        }
+
+        Storage.guardar(STORAGE_KEYS.PRODUCTOS, productos);
+        window.location.href = 'productos.html';
+      });
+    });
+  </script>
+
+</body>
+</html>

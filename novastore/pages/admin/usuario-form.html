@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nuevo usuario · Admin | NovaStore</title>
+  <link rel="icon" type="image/png" href="../../assets/img/marca/logo.png">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../../css/variables.css">
+  <link rel="stylesheet" href="../../css/brand-overrides.css">
+  <link rel="stylesheet" href="../../css/forms.css">
+  <link rel="stylesheet" href="../../css/tienda.css">
+  <link rel="stylesheet" href="../../css/admin.css">
+  <link rel="stylesheet" href="../../css/responsive.css">
+</head>
+<body>
+
+  <script>
+    window.RUTA_ASSETS_BASE = '../../assets/img/';
+    window.RUTA_TIENDA_BASE = '../../pages/tienda/';
+    window.RUTA_ADMIN_BASE = '../../pages/admin/';
+  </script>
+
+  <div class="layout-admin">
+    <nav class="admin-sidebar offcanvas-lg offcanvas-start" tabindex="-1" id="menuAdmin"
+      aria-label="Menú del administrador">
+      <div class="offcanvas-header d-lg-none">
+        <span class="fw-bold">Menú</span>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
+          data-bs-target="#menuAdmin" aria-label="Cerrar menú"></button>
+      </div>
+
+      <div class="offcanvas-body d-flex flex-column">
+        <a href="home.html" class="d-block mb-4">
+          <img src="../../assets/img/marca/logo-blanco.png" alt="NovaStore" style="height:44px;width:auto;">
+        </a>
+
+        <ul class="admin-sidebar__lista" data-menu-admin></ul>
+
+        <div class="mt-auto pt-4">
+          <p class="mb-2" data-usuario-admin></p>
+          <a href="../../index.html" class="d-block small mb-2">Ver la tienda</a>
+          <button type="button" class="btn btn-outline-light btn-sm w-100" data-salir>Cerrar sesión</button>
+        </div>
+      </div>
+    </nav>
+
+    <div class="admin-contenido">
+      <button class="btn btn-dark d-lg-none mb-3" type="button" data-bs-toggle="offcanvas"
+        data-bs-target="#menuAdmin" aria-controls="menuAdmin">&#9776; Menú</button>
+
+      <div class="admin-topbar">
+        <div>
+          <h1 class="h3 mb-1" data-titulo>Nuevo usuario</h1>
+          <p class="mb-0 small">Los campos marcados con * son obligatorios.</p>
+        </div>
+        <a href="usuarios.html" class="btn btn-outline-primary">Volver al listado</a>
+      </div>
+
+      <div class="alert alert-danger d-none" data-error-form></div>
+
+      <div class="card border-0 shadow-sm">
+        <div class="card-body">
+          <form class="formulario formulario--ancho" id="formUsuario" novalidate>
+            <input type="hidden" id="runOriginal">
+
+            <div class="formulario__fila">
+              <div class="campo">
+                <label class="campo__label" for="run">RUN *</label>
+                <input class="campo__input" type="text" id="run" minlength="7" maxlength="9" required>
+                <span class="campo__ayuda">Sin puntos ni guion. Ej: 19011022K</span>
+                <span class="campo__error"></span>
+              </div>
+              <div class="campo">
+                <label class="campo__label" for="tipoUsuario">Tipo de usuario *</label>
+                <select class="campo__input" id="tipoUsuario" required>
+                  <option value="">Selecciona un perfil</option>
+                  <option value="administrador">Administrador</option>
+                  <option value="vendedor">Vendedor</option>
+                  <option value="cliente">Cliente</option>
+                </select>
+                <span class="campo__error"></span>
+              </div>
+            </div>
+
+            <div class="formulario__fila">
+              <div class="campo">
+                <label class="campo__label" for="nombre">Nombre *</label>
+                <input class="campo__input" type="text" id="nombre" maxlength="50" required>
+                <span class="campo__ayuda">Máximo 50 caracteres.</span>
+                <span class="campo__error"></span>
+              </div>
+              <div class="campo">
+                <label class="campo__label" for="apellidos">Apellidos *</label>
+                <input class="campo__input" type="text" id="apellidos" maxlength="100" required>
+                <span class="campo__ayuda">Máximo 100 caracteres.</span>
+                <span class="campo__error"></span>
+              </div>
+            </div>
+
+            <div class="formulario__fila">
+              <div class="campo">
+                <label class="campo__label" for="correo">Correo *</label>
+                <input class="campo__input" type="email" id="correo" maxlength="100" required>
+                <span class="campo__ayuda">Solo @duoc.cl, @profesor.duoc.cl o @gmail.com.</span>
+                <span class="campo__error"></span>
+              </div>
+              <div class="campo">
+                <label class="campo__label" for="fechaNacimiento">Fecha de nacimiento</label>
+                <input class="campo__input" type="date" id="fechaNacimiento">
+                <span class="campo__ayuda">Opcional.</span>
+                <span class="campo__error"></span>
+              </div>
+            </div>
+
+            <div class="campo">
+              <label class="campo__label" for="password">Contraseña *</label>
+              <input class="campo__input" type="password" id="password" minlength="4" maxlength="10">
+              <span class="campo__ayuda" data-ayuda-password>Entre 4 y 10 caracteres.</span>
+              <span class="campo__error"></span>
+            </div>
+
+            <div class="formulario__fila">
+              <div class="campo">
+                <label class="campo__label" for="region">Región *</label>
+                <select class="campo__input" id="region" required></select>
+                <span class="campo__error"></span>
+              </div>
+              <div class="campo">
+                <label class="campo__label" for="comuna">Comuna *</label>
+                <select class="campo__input" id="comuna" required></select>
+                <span class="campo__error"></span>
+              </div>
+            </div>
+
+            <div class="campo">
+              <label class="campo__label" for="direccion">Dirección *</label>
+              <input class="campo__input" type="text" id="direccion" maxlength="300" required>
+              <span class="campo__ayuda">Máximo 300 caracteres.</span>
+              <span class="campo__error"></span>
+            </div>
+
+            <div class="d-flex flex-wrap gap-2">
+              <button type="submit" class="btn btn-primary">Guardar usuario</button>
+              <a href="usuarios.html" class="btn btn-outline-primary">Cancelar</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../../js/data/productos.js"></script>
+  <script src="../../js/data/regiones.js"></script>
+  <script src="../../js/data/blogs.js"></script>
+  <script src="../../js/utils/storage.js"></script>
+  <script src="../../js/utils/validaciones.js"></script>
+  <script src="../../js/utils/auth.js"></script>
+  <script src="../../js/utils/carrito.js"></script>
+  <script src="../../js/utils/ordenes.js"></script>
+  <script src="../../js/components/render-productos.js"></script>
+  <script src="../../js/components/admin-menu.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      inicializarProductos();
+      inicializarUsuarios();
+      Auth.protegerVistaAdmin();
+      Auth.protegerSoloAdministrador();
+      pintarMenuAdmin('usuarios');
+      aplicarPermisosEscritura();
+    });
+  </script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const region = document.getElementById('region');
+      const comuna = document.getElementById('comuna');
+      const tipoUsuario = document.getElementById('tipoUsuario');
+      const error = document.querySelector('[data-error-form]');
+
+      region.innerHTML = '<option value="">Selecciona una región</option>'
+        + REGIONES.map((item) => `<option value="${item.id}">${item.nombre}</option>`).join('');
+
+      function cargarComunas(regionId, comunaSeleccionada) {
+        const encontrada = REGIONES.find((item) => item.id === regionId);
+        if (!encontrada) {
+          comuna.innerHTML = '<option value="">Selecciona primero una región</option>';
+          return;
+        }
+        comuna.innerHTML = '<option value="">Selecciona una comuna</option>'
+          + encontrada.comunas.map((nombre) =>
+              `<option value="${nombre}" ${nombre === comunaSeleccionada ? 'selected' : ''}>${nombre}</option>`
+            ).join('');
+      }
+
+      cargarComunas(null);
+      region.addEventListener('change', () => cargarComunas(region.value));
+
+      const campos = {
+        run: document.getElementById('run'),
+        nombre: document.getElementById('nombre'),
+        apellidos: document.getElementById('apellidos'),
+        correo: document.getElementById('correo'),
+        password: document.getElementById('password'),
+        direccion: document.getElementById('direccion')
+      };
+
+      const runOriginal = new URLSearchParams(window.location.search).get('run');
+      const editando = Boolean(runOriginal);
+
+      const reglas = {
+        run: [
+          { test: esRequerido, mensaje: 'El RUN es obligatorio.' },
+          { test: (valor) => tieneLargoMinimo(valor, 7), mensaje: 'Mínimo 7 caracteres.' },
+          { test: (valor) => tieneLargoMaximo(valor, 9), mensaje: 'Máximo 9 caracteres.' },
+          { test: esRunValido, mensaje: 'El RUN no es válido. Escríbelo sin puntos ni guion.' }
+        ],
+        nombre: [
+          { test: esRequerido, mensaje: 'El nombre es obligatorio.' },
+          { test: (valor) => tieneLargoMaximo(valor, 50), mensaje: 'Máximo 50 caracteres.' }
+        ],
+        apellidos: [
+          { test: esRequerido, mensaje: 'Los apellidos son obligatorios.' },
+          { test: (valor) => tieneLargoMaximo(valor, 100), mensaje: 'Máximo 100 caracteres.' }
+        ],
+        correo: [
+          { test: esRequerido, mensaje: 'El correo es obligatorio.' },
+          { test: (valor) => tieneLargoMaximo(valor, 100), mensaje: 'Máximo 100 caracteres.' },
+          { test: esCorreoValido, mensaje: 'Solo se aceptan @duoc.cl, @profesor.duoc.cl o @gmail.com.' }
+        ],
+        password: [
+          { test: (valor) => editando ? true : esRequerido(valor), mensaje: 'La contraseña es obligatoria.' },
+          { test: (valor) => !esRequerido(valor) || tieneLargoMinimo(valor, 4), mensaje: 'Mínimo 4 caracteres.' },
+          { test: (valor) => !esRequerido(valor) || tieneLargoMaximo(valor, 10), mensaje: 'Máximo 10 caracteres.' }
+        ],
+        direccion: [
+          { test: esRequerido, mensaje: 'La dirección es obligatoria.' },
+          { test: (valor) => tieneLargoMaximo(valor, 300), mensaje: 'Máximo 300 caracteres.' }
+        ]
+      };
+
+      Object.keys(campos).forEach((clave) => {
+        campos[clave].addEventListener('blur', () => validarCampo(campos[clave], reglas[clave]));
+      });
+
+      if (editando) {
+        const usuario = Storage.obtener(STORAGE_KEYS.USUARIOS, []).find((item) => item.run === runOriginal);
+        if (usuario) {
+          document.querySelector('[data-titulo]').textContent = 'Editar usuario';
+          document.title = 'Editar usuario | NovaStore';
+          document.getElementById('runOriginal').value = usuario.run;
+          campos.run.value = usuario.run;
+          campos.nombre.value = usuario.nombre;
+          campos.apellidos.value = usuario.apellidos || '';
+          campos.correo.value = usuario.correo;
+          campos.direccion.value = usuario.direccion || '';
+          document.getElementById('fechaNacimiento').value = usuario.fechaNacimiento || '';
+          tipoUsuario.value = usuario.tipoUsuario;
+          region.value = usuario.region || '';
+          cargarComunas(usuario.region, usuario.comuna);
+          document.querySelector('[data-ayuda-password]').textContent =
+            'Déjala vacía para mantener la contraseña actual.';
+        }
+      }
+
+      document.getElementById('formUsuario').addEventListener('submit', (evento) => {
+        evento.preventDefault();
+        error.classList.add('d-none');
+
+        const valido = Object.keys(campos)
+          .map((clave) => validarCampo(campos[clave], reglas[clave]))
+          .every(Boolean);
+
+        if (!tipoUsuario.value) {
+          error.textContent = 'Selecciona el tipo de usuario.';
+          error.classList.remove('d-none');
+          return;
+        }
+        if (!region.value || !comuna.value) {
+          error.textContent = 'Selecciona la región y la comuna.';
+          error.classList.remove('d-none');
+          return;
+        }
+        if (!valido) return;
+
+        const usuarios = Storage.obtener(STORAGE_KEYS.USUARIOS, []);
+        const nuevoRun = campos.run.value.trim().toUpperCase();
+
+        const repetido = usuarios.some((item) =>
+          (item.run === nuevoRun || item.correo.toLowerCase() === campos.correo.value.trim().toLowerCase())
+          && item.run !== runOriginal);
+
+        if (repetido) {
+          error.textContent = 'Ya existe otra cuenta con ese RUN o correo.';
+          error.classList.remove('d-none');
+          return;
+        }
+
+        const datos = {
+          run: nuevoRun,
+          nombre: campos.nombre.value.trim(),
+          apellidos: campos.apellidos.value.trim(),
+          correo: campos.correo.value.trim(),
+          fechaNacimiento: document.getElementById('fechaNacimiento').value,
+          tipoUsuario: tipoUsuario.value,
+          region: region.value,
+          comuna: comuna.value,
+          direccion: campos.direccion.value.trim()
+        };
+
+        if (editando) {
+          const indice = usuarios.findIndex((item) => item.run === runOriginal);
+          const anterior = usuarios[indice];
+          datos.password = campos.password.value ? campos.password.value : anterior.password;
+          usuarios[indice] = Object.assign({}, anterior, datos);
+        } else {
+          datos.password = campos.password.value;
+          usuarios.push(datos);
+        }
+
+        Storage.guardar(STORAGE_KEYS.USUARIOS, usuarios);
+        window.location.href = 'usuarios.html';
+      });
+    });
+  </script>
+
+</body>
+</html>

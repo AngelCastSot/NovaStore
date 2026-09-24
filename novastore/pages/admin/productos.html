@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Productos · Admin | NovaStore</title>
+  <link rel="icon" type="image/png" href="../../assets/img/marca/logo.png">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../../css/variables.css">
+  <link rel="stylesheet" href="../../css/brand-overrides.css">
+  <link rel="stylesheet" href="../../css/forms.css">
+  <link rel="stylesheet" href="../../css/tienda.css">
+  <link rel="stylesheet" href="../../css/admin.css">
+  <link rel="stylesheet" href="../../css/responsive.css">
+</head>
+<body>
+
+  <script>
+    window.RUTA_ASSETS_BASE = '../../assets/img/';
+    window.RUTA_TIENDA_BASE = '../../pages/tienda/';
+    window.RUTA_ADMIN_BASE = '../../pages/admin/';
+  </script>
+
+  <div class="layout-admin">
+    <nav class="admin-sidebar offcanvas-lg offcanvas-start" tabindex="-1" id="menuAdmin"
+      aria-label="Menú del administrador">
+      <div class="offcanvas-header d-lg-none">
+        <span class="fw-bold">Menú</span>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
+          data-bs-target="#menuAdmin" aria-label="Cerrar menú"></button>
+      </div>
+
+      <div class="offcanvas-body d-flex flex-column">
+        <a href="home.html" class="d-block mb-4">
+          <img src="../../assets/img/marca/logo-blanco.png" alt="NovaStore" style="height:44px;width:auto;">
+        </a>
+
+        <ul class="admin-sidebar__lista" data-menu-admin></ul>
+
+        <div class="mt-auto pt-4">
+          <p class="mb-2" data-usuario-admin></p>
+          <a href="../../index.html" class="d-block small mb-2">Ver la tienda</a>
+          <button type="button" class="btn btn-outline-light btn-sm w-100" data-salir>Cerrar sesión</button>
+        </div>
+      </div>
+    </nav>
+
+    <div class="admin-contenido">
+      <button class="btn btn-dark d-lg-none mb-3" type="button" data-bs-toggle="offcanvas"
+        data-bs-target="#menuAdmin" aria-controls="menuAdmin">&#9776; Menú</button>
+
+      <div class="admin-topbar">
+        <div>
+          <h1 class="h3 mb-1">Productos</h1>
+          <p class="mb-0 small">Mantenedor del catálogo de la tienda.</p>
+        </div>
+        <a href="producto-form.html" class="btn btn-primary" data-solo-admin>Nuevo producto</a>
+      </div>
+
+      <div class="row g-3 mb-4">
+        <div class="col-12 col-md-6 col-lg-4">
+          <label class="form-label fw-semibold" for="buscador">Buscar</label>
+          <input type="search" id="buscador" class="form-control" placeholder="Código o nombre">
+        </div>
+        <div class="col-12 col-md-6 col-lg-4">
+          <label class="form-label fw-semibold" for="filtroCategoria">Categoría</label>
+          <select id="filtroCategoria" class="form-select"></select>
+        </div>
+      </div>
+
+      <div class="table-responsive">
+        <table class="table align-middle bg-white">
+          <thead>
+            <tr>
+              <th scope="col">Imagen</th>
+              <th scope="col">Código</th>
+              <th scope="col">Nombre</th>
+              <th scope="col">Categoría</th>
+              <th scope="col">Precio</th>
+              <th scope="col">Stock</th>
+              <th scope="col">Acciones</th>
+            </tr>
+          </thead>
+          <tbody data-tabla-productos></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../../js/data/productos.js"></script>
+  <script src="../../js/data/regiones.js"></script>
+  <script src="../../js/data/blogs.js"></script>
+  <script src="../../js/utils/storage.js"></script>
+  <script src="../../js/utils/validaciones.js"></script>
+  <script src="../../js/utils/auth.js"></script>
+  <script src="../../js/utils/carrito.js"></script>
+  <script src="../../js/utils/ordenes.js"></script>
+  <script src="../../js/components/render-productos.js"></script>
+  <script src="../../js/components/admin-menu.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      inicializarProductos();
+      inicializarUsuarios();
+      Auth.protegerVistaAdmin();
+      pintarMenuAdmin('productos');
+      aplicarPermisosEscritura();
+    });
+  </script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const buscador = document.getElementById('buscador');
+      const filtro = document.getElementById('filtroCategoria');
+
+      filtro.innerHTML = '<option value="todas">Todas las categorías</option>'
+        + CATEGORIAS.map((cat) => `<option value="${cat.id}">${cat.nombre}</option>`).join('');
+
+      function nombreCategoria(id) {
+        const cat = CATEGORIAS.find((item) => item.id === id);
+        return cat ? cat.nombre : id;
+      }
+
+      function pintarTabla() {
+        const texto = buscador.value.trim().toLowerCase();
+        const productos = Storage.obtener(STORAGE_KEYS.PRODUCTOS, PRODUCTOS).filter((item) => {
+          const coincideTexto = item.nombre.toLowerCase().includes(texto)
+            || item.codigo.toLowerCase().includes(texto);
+          const coincideCategoria = filtro.value === 'todas' || item.categoria === filtro.value;
+          return coincideTexto && coincideCategoria;
+        });
+
+        const puedeEditar = esAdministrador();
+
+        document.querySelector('[data-tabla-productos]').innerHTML = productos.length
+          ? productos.map((item) => `
+              <tr>
+                <td><img src="../../assets/img/${item.imagen}" alt="" class="admin-miniatura"></td>
+                <td>${item.codigo}</td>
+                <td>${item.nombre}</td>
+                <td>${nombreCategoria(item.categoria)}</td>
+                <td>${formatearCLP(item.precio)}</td>
+                <td>${Number(item.stock) <= Number(item.stockCritico || 0)
+                    ? `<span class="badge text-bg-warning">${item.stock}</span>`
+                    : item.stock}</td>
+                <td>
+                  <div class="admin-acciones-tabla">
+                    <a href="producto-detalle.html?id=${item.id}" class="btn btn-outline-secondary">Ver</a>
+                    ${puedeEditar ? `
+                      <a href="producto-form.html?id=${item.id}" class="btn btn-outline-primary">Editar</a>
+                      <button type="button" class="btn btn-outline-danger" data-borrar="${item.id}">Eliminar</button>
+                    ` : ''}
+                  </div>
+                </td>
+              </tr>`).join('')
+          : '<tr><td colspan="7" class="text-center py-4">No hay productos con esos filtros.</td></tr>';
+
+        document.querySelectorAll('[data-borrar]').forEach((boton) => {
+          boton.addEventListener('click', () => {
+            if (!confirm('¿Eliminar este producto del catálogo?')) return;
+            const id = boton.getAttribute('data-borrar');
+            Storage.guardar(STORAGE_KEYS.PRODUCTOS,
+              Storage.obtener(STORAGE_KEYS.PRODUCTOS, PRODUCTOS).filter((item) => item.id !== id));
+            pintarTabla();
+          });
+        });
+      }
+
+      buscador.addEventListener('input', pintarTabla);
+      filtro.addEventListener('change', pintarTabla);
+      pintarTabla();
+    });
+  </script>
+
+</body>
+</html>

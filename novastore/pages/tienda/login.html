@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ingresar | NovaStore</title>
+  <link rel="icon" type="image/png" href="../../assets/img/marca/logo.png">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../../css/variables.css">
+  <link rel="stylesheet" href="../../css/brand-overrides.css">
+  <link rel="stylesheet" href="../../css/forms.css">
+  <link rel="stylesheet" href="../../css/tienda.css">
+  <link rel="stylesheet" href="../../css/admin.css">
+  <link rel="stylesheet" href="../../css/responsive.css">
+</head>
+<body>
+
+  <script>
+    window.RUTA_ASSETS_BASE = '../../assets/img/';
+    window.RUTA_TIENDA_BASE = '../../pages/tienda/';
+    window.RUTA_ADMIN_BASE = '../../pages/admin/';
+  </script>
+
+  <header class="navbar navbar-expand-lg bg-white shadow-sm sticky-top py-3">
+    <div class="container">
+      <a href="../../index.html" class="navbar-brand d-flex align-items-center gap-2 fw-bold" aria-label="NovaStore, ir al inicio">
+        <img src="../../assets/img/marca/logo.png" alt="Logo de NovaStore" class="navbar-brand__logo">
+        <span class="visually-hidden">NovaStore</span>
+      </a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navPrincipal"
+        aria-controls="navPrincipal" aria-expanded="false" aria-label="Abrir menú">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navPrincipal">
+        <ul class="navbar-nav mx-auto gap-lg-3 text-center">
+          <li class="nav-item"><a class="nav-link" href="../../index.html">Inicio</a></li>
+          <li class="nav-item"><a class="nav-link" href="../../pages/tienda/productos.html">Productos</a></li>
+          <li class="nav-item"><a class="nav-link" href="../../pages/tienda/blogs.html">Blog</a></li>
+          <li class="nav-item"><a class="nav-link" href="../../pages/tienda/nosotros.html">Nosotros</a></li>
+          <li class="nav-item"><a class="nav-link" href="../../pages/tienda/contacto.html">Contacto</a></li>
+        </ul>
+
+        <div class="d-flex flex-wrap align-items-center gap-3 justify-content-center mt-3 mt-lg-0">
+          <span data-sesion-area></span>
+          <a class="btn btn-outline-primary position-relative" href="../../pages/tienda/carrito.html">
+            🛒 Carrito
+            <span class="badge rounded-pill text-bg-danger position-absolute top-0 start-100 translate-middle"
+              data-carrito-contador>0</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container py-5">
+    <div class="row justify-content-center">
+      <div class="col-12 col-md-8 col-lg-5">
+        <h1 class="h3 mb-1">Ingresar</h1>
+        <p class="mb-4">Entra con tu cuenta para finalizar tus compras.</p>
+
+        <div class="alert alert-danger d-none" data-error-login></div>
+
+        <form class="formulario" id="formLogin" novalidate>
+          <div class="campo">
+            <label class="campo__label" for="correo">Correo</label>
+            <input class="campo__input" type="email" id="correo" maxlength="100" required autocomplete="username">
+            <span class="campo__error"></span>
+          </div>
+
+          <div class="campo">
+            <label class="campo__label" for="password">Contraseña</label>
+            <input class="campo__input" type="password" id="password" minlength="4" maxlength="10" required
+              autocomplete="current-password">
+            <span class="campo__ayuda">Entre 4 y 10 caracteres.</span>
+            <span class="campo__error"></span>
+          </div>
+
+          <button type="submit" class="btn btn-primary">Ingresar</button>
+        </form>
+
+        <p class="mt-3 mb-0">¿No tienes cuenta? <a href="registro.html">Crea una aquí</a>.</p>
+
+        <div class="card mt-4 border-0 bg-white shadow-sm">
+          <div class="card-body small">
+            <p class="fw-semibold mb-2">Cuentas de prueba</p>
+            <p class="mb-1">admin@duoc.cl / admin123</p>
+            <p class="mb-0">vendedor@duoc.cl / vendedor123</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer-marca mt-5">
+    <div class="container py-5">
+      <div class="row g-4">
+        <div class="col-12 col-sm-6 col-lg-3">
+          <img src="../../assets/img/marca/logo-blanco.png" alt="NovaStore" class="footer-marca__logo mb-2">
+          <p class="small">Tienda online de tecnología. Proyecto académico DSY1104.</p>
+        </div>
+        <div class="col-6 col-lg-3">
+          <p class="fw-bold mb-2">Tienda</p>
+          <p class="mb-1"><a href="../../pages/tienda/productos.html">Productos</a></p>
+          <p class="mb-1"><a href="../../pages/tienda/carrito.html">Carrito</a></p>
+          <p class="mb-1"><a href="../../pages/tienda/login.html">Ingresar</a></p>
+          <p class="mb-1"><a href="../../pages/tienda/registro.html">Crear cuenta</a></p>
+        </div>
+        <div class="col-6 col-lg-3">
+          <p class="fw-bold mb-2">Empresa</p>
+          <p class="mb-1"><a href="../../pages/tienda/nosotros.html">Nosotros</a></p>
+          <p class="mb-1"><a href="../../pages/tienda/blogs.html">Blog</a></p>
+          <p class="mb-1"><a href="../../pages/tienda/contacto.html">Contacto</a></p>
+        </div>
+        <div class="col-12 col-lg-3">
+          <p class="fw-bold mb-2">Contacto</p>
+          <p class="mb-1 small">contacto@novastore.cl</p>
+          <p class="mb-1 small">Concepción, Chile</p>
+        </div>
+      </div>
+      <p class="text-center small footer-marca__copy border-top border-secondary-subtle pt-3 mt-4 mb-0">
+        © 2026 NovaStore. Todos los derechos reservados.
+      </p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../../js/data/productos.js"></script>
+  <script src="../../js/data/regiones.js"></script>
+  <script src="../../js/data/blogs.js"></script>
+  <script src="../../js/utils/storage.js"></script>
+  <script src="../../js/utils/validaciones.js"></script>
+  <script src="../../js/utils/auth.js"></script>
+  <script src="../../js/utils/carrito.js"></script>
+  <script src="../../js/utils/ordenes.js"></script>
+  <script src="../../js/components/navbar.js"></script>
+  <script src="../../js/components/render-productos.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      inicializarProductos();
+      inicializarUsuarios();
+
+      const formulario = document.getElementById('formLogin');
+      const correo = document.getElementById('correo');
+      const password = document.getElementById('password');
+      const error = document.querySelector('[data-error-login]');
+
+      const reglasCorreo = [
+        { test: esRequerido, mensaje: 'Escribe tu correo.' },
+        { test: (valor) => tieneLargoMaximo(valor, 100), mensaje: 'Máximo 100 caracteres.' },
+        { test: esCorreoValido, mensaje: 'Usa un correo @duoc.cl, @profesor.duoc.cl o @gmail.com.' }
+      ];
+      const reglasPassword = [
+        { test: esRequerido, mensaje: 'Escribe tu contraseña.' },
+        { test: (valor) => tieneLargoMinimo(valor, 4), mensaje: 'Mínimo 4 caracteres.' },
+        { test: (valor) => tieneLargoMaximo(valor, 10), mensaje: 'Máximo 10 caracteres.' }
+      ];
+
+      formulario.addEventListener('submit', (evento) => {
+        evento.preventDefault();
+        error.classList.add('d-none');
+
+        const valido = [
+          validarCampo(correo, reglasCorreo),
+          validarCampo(password, reglasPassword)
+        ].every(Boolean);
+        if (!valido) return;
+
+        const usuarios = Storage.obtener(STORAGE_KEYS.USUARIOS, []);
+        const usuario = usuarios.find((item) =>
+          item.correo.toLowerCase() === correo.value.trim().toLowerCase()
+          && item.password === password.value);
+
+        if (!usuario) {
+          error.textContent = 'Correo o contraseña incorrectos. Revisa los datos e inténtalo otra vez.';
+          error.classList.remove('d-none');
+          return;
+        }
+
+        Auth.iniciarSesion(usuario);
+
+        const redirect = new URLSearchParams(window.location.search).get('redirect');
+        if (redirect === 'carrito') {
+          window.location.href = 'carrito.html';
+        } else if (usuario.tipoUsuario !== ROLES.CLIENTE) {
+          window.location.href = '../admin/home.html';
+        } else {
+          window.location.href = '../../index.html';
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>

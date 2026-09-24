@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog | NovaStore</title>
+  <link rel="icon" type="image/png" href="../../assets/img/marca/logo.png">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../../css/variables.css">
+  <link rel="stylesheet" href="../../css/brand-overrides.css">
+  <link rel="stylesheet" href="../../css/forms.css">
+  <link rel="stylesheet" href="../../css/tienda.css">
+  <link rel="stylesheet" href="../../css/admin.css">
+  <link rel="stylesheet" href="../../css/responsive.css">
+</head>
+<body>
+
+  <script>
+    window.RUTA_ASSETS_BASE = '../../assets/img/';
+    window.RUTA_TIENDA_BASE = '../../pages/tienda/';
+    window.RUTA_ADMIN_BASE = '../../pages/admin/';
+  </script>
+
+  <header class="navbar navbar-expand-lg bg-white shadow-sm sticky-top py-3">
+    <div class="container">
+      <a href="../../index.html" class="navbar-brand d-flex align-items-center gap-2 fw-bold" aria-label="NovaStore, ir al inicio">
+        <img src="../../assets/img/marca/logo.png" alt="Logo de NovaStore" class="navbar-brand__logo">
+        <span class="visually-hidden">NovaStore</span>
+      </a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navPrincipal"
+        aria-controls="navPrincipal" aria-expanded="false" aria-label="Abrir menú">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navPrincipal">
+        <ul class="navbar-nav mx-auto gap-lg-3 text-center">
+          <li class="nav-item"><a class="nav-link" href="../../index.html">Inicio</a></li>
+          <li class="nav-item"><a class="nav-link" href="../../pages/tienda/productos.html">Productos</a></li>
+          <li class="nav-item"><a class="nav-link active" href="../../pages/tienda/blogs.html" aria-current="page">Blog</a></li>
+          <li class="nav-item"><a class="nav-link" href="../../pages/tienda/nosotros.html">Nosotros</a></li>
+          <li class="nav-item"><a class="nav-link" href="../../pages/tienda/contacto.html">Contacto</a></li>
+        </ul>
+
+        <div class="d-flex flex-wrap align-items-center gap-3 justify-content-center mt-3 mt-lg-0">
+          <span data-sesion-area></span>
+          <a class="btn btn-outline-primary position-relative" href="../../pages/tienda/carrito.html">
+            🛒 Carrito
+            <span class="badge rounded-pill text-bg-danger position-absolute top-0 start-100 translate-middle"
+              data-carrito-contador>0</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container py-4 py-lg-5">
+    <h1 class="mb-2">Blog NovaStore</h1>
+    <p class="mb-4">Guías simples para elegir bien y sacarle partido a tus equipos.</p>
+
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4" data-grilla-blogs></div>
+  </main>
+
+  <footer class="footer-marca mt-5">
+    <div class="container py-5">
+      <div class="row g-4">
+        <div class="col-12 col-sm-6 col-lg-3">
+          <img src="../../assets/img/marca/logo-blanco.png" alt="NovaStore" class="footer-marca__logo mb-2">
+          <p class="small">Tienda online de tecnología. Proyecto académico DSY1104.</p>
+        </div>
+        <div class="col-6 col-lg-3">
+          <p class="fw-bold mb-2">Tienda</p>
+          <p class="mb-1"><a href="../../pages/tienda/productos.html">Productos</a></p>
+          <p class="mb-1"><a href="../../pages/tienda/carrito.html">Carrito</a></p>
+          <p class="mb-1"><a href="../../pages/tienda/login.html">Ingresar</a></p>
+          <p class="mb-1"><a href="../../pages/tienda/registro.html">Crear cuenta</a></p>
+        </div>
+        <div class="col-6 col-lg-3">
+          <p class="fw-bold mb-2">Empresa</p>
+          <p class="mb-1"><a href="../../pages/tienda/nosotros.html">Nosotros</a></p>
+          <p class="mb-1"><a href="../../pages/tienda/blogs.html">Blog</a></p>
+          <p class="mb-1"><a href="../../pages/tienda/contacto.html">Contacto</a></p>
+        </div>
+        <div class="col-12 col-lg-3">
+          <p class="fw-bold mb-2">Contacto</p>
+          <p class="mb-1 small">contacto@novastore.cl</p>
+          <p class="mb-1 small">Concepción, Chile</p>
+        </div>
+      </div>
+      <p class="text-center small footer-marca__copy border-top border-secondary-subtle pt-3 mt-4 mb-0">
+        © 2026 NovaStore. Todos los derechos reservados.
+      </p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../../js/data/productos.js"></script>
+  <script src="../../js/data/regiones.js"></script>
+  <script src="../../js/data/blogs.js"></script>
+  <script src="../../js/utils/storage.js"></script>
+  <script src="../../js/utils/validaciones.js"></script>
+  <script src="../../js/utils/auth.js"></script>
+  <script src="../../js/utils/carrito.js"></script>
+  <script src="../../js/utils/ordenes.js"></script>
+  <script src="../../js/components/navbar.js"></script>
+  <script src="../../js/components/render-productos.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      inicializarProductos();
+      inicializarUsuarios();
+
+      const contenedor = document.querySelector('[data-grilla-blogs]');
+      contenedor.innerHTML = BLOGS.map((articulo) => `
+        <div class="col">
+          <article class="card h-100 shadow-sm">
+            <a href="blog-detalle.html?id=${articulo.id}">
+              <img src="${RUTA_ASSETS + articulo.imagen}" class="card-img-top tarjeta-blog__imagen"
+                alt="Ilustración de ${articulo.titulo}" loading="lazy">
+            </a>
+            <div class="card-body d-flex flex-column">
+              <p class="small text-marca fw-semibold mb-1">
+                ${new Date(articulo.fecha).toLocaleDateString('es-CL')} · ${articulo.categoria}
+              </p>
+              <h2 class="h5">
+                <a href="blog-detalle.html?id=${articulo.id}" class="text-body text-decoration-none">
+                  ${articulo.titulo}
+                </a>
+              </h2>
+              <p class="small">${articulo.resumen}</p>
+              <a href="blog-detalle.html?id=${articulo.id}" class="mt-auto fw-semibold">Leer artículo</a>
+            </div>
+          </article>
+        </div>
+      `).join('');
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carrito | NovaStore</title>
+  <link rel="icon" type="image/png" href="../../assets/img/marca/logo.png">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../../css/variables.css">
+  <link rel="stylesheet" href="../../css/brand-overrides.css">
+  <link rel="stylesheet" href="../../css/forms.css">
+  <link rel="stylesheet" href="../../css/tienda.css">
+  <link rel="stylesheet" href="../../css/admin.css">
+  <link rel="stylesheet" href="../../css/responsive.css">
+</head>
+<body>
+
+  <script>
+    window.RUTA_ASSETS_BASE = '../../assets/img/';
+    window.RUTA_TIENDA_BASE = '../../pages/tienda/';
+    window.RUTA_ADMIN_BASE = '../../pages/admin/';
+  </script>
+
+  <header class="navbar navbar-expand-lg bg-white shadow-sm sticky-top py-3">
+    <div class="container">
+      <a href="../../index.html" class="navbar-brand d-flex align-items-center gap-2 fw-bold" aria-label="NovaStore, ir al inicio">
+        <img src="../../assets/img/marca/logo.png" alt="Logo de NovaStore" class="navbar-brand__logo">
+        <span class="visually-hidden">NovaStore</span>
+      </a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navPrincipal"
+        aria-controls="navPrincipal" aria-expanded="false" aria-label="Abrir menú">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navPrincipal">
+        <ul class="navbar-nav mx-auto gap-lg-3 text-center">
+          <li class="nav-item"><a class="nav-link" href="../../index.html">Inicio</a></li>
+          <li class="nav-item"><a class="nav-link" href="../../pages/tienda/productos.html">Productos</a></li>
+          <li class="nav-item"><a class="nav-link" href="../../pages/tienda/blogs.html">Blog</a></li>
+          <li class="nav-item"><a class="nav-link" href="../../pages/tienda/nosotros.html">Nosotros</a></li>
+          <li class="nav-item"><a class="nav-link" href="../../pages/tienda/contacto.html">Contacto</a></li>
+        </ul>
+
+        <div class="d-flex flex-wrap align-items-center gap-3 justify-content-center mt-3 mt-lg-0">
+          <span data-sesion-area></span>
+          <a class="btn btn-outline-primary position-relative" href="../../pages/tienda/carrito.html">
+            🛒 Carrito
+            <span class="badge rounded-pill text-bg-danger position-absolute top-0 start-100 translate-middle"
+              data-carrito-contador>0</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container py-4 py-lg-5">
+    <h1 class="mb-4">Tu carrito</h1>
+
+    <div class="alert alert-warning d-none" data-aviso-storage>
+      Tu navegador está bloqueando el almacenamiento local, así que el carrito solo durará mientras
+      no cambies de página. Abre el proyecto con un servidor local (por ejemplo la extensión
+      Live Server de VS Code) para que funcione completo.
+    </div>
+
+    <div class="alert alert-success d-none" data-orden-ok></div>
+
+    <div class="carrito-layout">
+      <section>
+        <div data-lista-carrito></div>
+        <div class="d-flex flex-wrap gap-2 mt-4">
+          <a href="productos.html" class="btn btn-outline-primary">Seguir comprando</a>
+          <button type="button" class="btn btn-outline-danger" data-vaciar>Vaciar carrito</button>
+        </div>
+      </section>
+
+      <aside class="carrito-resumen">
+        <h2 class="h5 mb-3">Resumen de compra</h2>
+        <div class="d-flex justify-content-between">
+          <span>Productos</span><span data-cantidad-total>0</span>
+        </div>
+        <div class="d-flex justify-content-between">
+          <span>Despacho</span><span>Gratis</span>
+        </div>
+        <div class="carrito-resumen__total">
+          <span>Total</span><span data-total>$0</span>
+        </div>
+        <button type="button" class="btn btn-primary w-100 mt-3" data-pagar>Continuar compra</button>
+        <p class="small mb-0 mt-2" data-aviso-sesion></p>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="footer-marca mt-5">
+    <div class="container py-5">
+      <div class="row g-4">
+        <div class="col-12 col-sm-6 col-lg-3">
+          <img src="../../assets/img/marca/logo-blanco.png" alt="NovaStore" class="footer-marca__logo mb-2">
+          <p class="small">Tienda online de tecnología. Proyecto académico DSY1104.</p>
+        </div>
+        <div class="col-6 col-lg-3">
+          <p class="fw-bold mb-2">Tienda</p>
+          <p class="mb-1"><a href="../../pages/tienda/productos.html">Productos</a></p>
+          <p class="mb-1"><a href="../../pages/tienda/carrito.html">Carrito</a></p>
+          <p class="mb-1"><a href="../../pages/tienda/login.html">Ingresar</a></p>
+          <p class="mb-1"><a href="../../pages/tienda/registro.html">Crear cuenta</a></p>
+        </div>
+        <div class="col-6 col-lg-3">
+          <p class="fw-bold mb-2">Empresa</p>
+          <p class="mb-1"><a href="../../pages/tienda/nosotros.html">Nosotros</a></p>
+          <p class="mb-1"><a href="../../pages/tienda/blogs.html">Blog</a></p>
+          <p class="mb-1"><a href="../../pages/tienda/contacto.html">Contacto</a></p>
+        </div>
+        <div class="col-12 col-lg-3">
+          <p class="fw-bold mb-2">Contacto</p>
+          <p class="mb-1 small">contacto@novastore.cl</p>
+          <p class="mb-1 small">Concepción, Chile</p>
+        </div>
+      </div>
+      <p class="text-center small footer-marca__copy border-top border-secondary-subtle pt-3 mt-4 mb-0">
+        © 2026 NovaStore. Todos los derechos reservados.
+      </p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../../js/data/productos.js"></script>
+  <script src="../../js/data/regiones.js"></script>
+  <script src="../../js/data/blogs.js"></script>
+  <script src="../../js/utils/storage.js"></script>
+  <script src="../../js/utils/validaciones.js"></script>
+  <script src="../../js/utils/auth.js"></script>
+  <script src="../../js/utils/carrito.js"></script>
+  <script src="../../js/utils/ordenes.js"></script>
+  <script src="../../js/components/navbar.js"></script>
+  <script src="../../js/components/render-productos.js"></script>
+  <script>
+    function pintarCarrito() {
+      const contenedor = document.querySelector('[data-lista-carrito]');
+      const carrito = obtenerCarrito();
+
+      if (carrito.length === 0) {
+        contenedor.innerHTML = `
+          <div class="alert alert-light border text-center py-5">
+            <p class="mb-3">Tu carrito está vacío.</p>
+            <a href="productos.html" class="btn btn-primary">Ver productos</a>
+          </div>`;
+      } else {
+        contenedor.innerHTML = carrito.map((item) => `
+          <article class="carrito-item">
+            <div class="carrito-item__imagen">
+              <img src="${RUTA_ASSETS + item.imagen}" alt="${item.nombre}">
+            </div>
+            <div>
+              <a href="producto-detalle.html?id=${item.id}" class="fw-semibold">${item.nombre}</a>
+              <p class="small mb-0">${formatearCLP(item.precio)} c/u</p>
+            </div>
+            <div class="cantidad-selector mb-0">
+              <button type="button" data-restar="${item.id}" aria-label="Quitar una unidad">−</button>
+              <input type="number" value="${item.cantidad}" min="1" data-cantidad="${item.id}"
+                aria-label="Cantidad de ${item.nombre}">
+              <button type="button" data-sumar="${item.id}" aria-label="Agregar una unidad">+</button>
+            </div>
+            <div class="text-end">
+              <p class="fw-bold mb-1">${formatearCLP(item.precio * item.cantidad)}</p>
+              <button type="button" class="link-boton small" data-eliminar="${item.id}">Eliminar</button>
+            </div>
+          </article>
+        `).join('');
+      }
+
+      const totalItems = carrito.reduce((suma, item) => suma + item.cantidad, 0);
+      document.querySelector('[data-cantidad-total]').textContent = totalItems;
+      document.querySelector('[data-total]').textContent = formatearCLP(calcularTotalCarrito());
+      document.querySelector('[data-pagar]').disabled = carrito.length === 0;
+
+      pintarContadorCarrito();
+      conectarAcciones();
+    }
+
+    function conectarAcciones() {
+      document.querySelectorAll('[data-eliminar]').forEach((boton) => {
+        boton.addEventListener('click', () => {
+          eliminarDelCarrito(boton.getAttribute('data-eliminar'));
+          pintarCarrito();
+        });
+      });
+
+      document.querySelectorAll('[data-sumar]').forEach((boton) => {
+        boton.addEventListener('click', () => cambiarCantidad(boton.getAttribute('data-sumar'), 1));
+      });
+
+      document.querySelectorAll('[data-restar]').forEach((boton) => {
+        boton.addEventListener('click', () => cambiarCantidad(boton.getAttribute('data-restar'), -1));
+      });
+
+      document.querySelectorAll('[data-cantidad]').forEach((input) => {
+        input.addEventListener('change', () => {
+          const id = input.getAttribute('data-cantidad');
+          const resultado = actualizarCantidadCarrito(id, Number(input.value));
+          if (!resultado.ok && resultado.mensaje) alert(resultado.mensaje);
+          pintarCarrito();
+        });
+      });
+    }
+
+    function cambiarCantidad(id, delta) {
+      const item = obtenerCarrito().find((producto) => producto.id === id);
+      if (!item) return;
+      const resultado = actualizarCantidadCarrito(id, item.cantidad + delta);
+      if (!resultado.ok && resultado.mensaje) alert(resultado.mensaje);
+      pintarCarrito();
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      inicializarProductos();
+      inicializarUsuarios();
+      pintarCarrito();
+
+      if (!Storage.disponible()) {
+        document.querySelector('[data-aviso-storage]').classList.remove('d-none');
+      }
+
+      window.addEventListener('pageshow', pintarCarrito);
+      window.addEventListener('storage', pintarCarrito);
+
+      const aviso = document.querySelector('[data-aviso-sesion]');
+      if (!Auth.estaAutenticado()) {
+        aviso.innerHTML = 'Necesitas <a href="login.html">iniciar sesión</a> para finalizar la compra.';
+      }
+
+      document.querySelector('[data-vaciar]').addEventListener('click', () => {
+        if (obtenerCarrito().length === 0) return;
+        if (confirm('¿Quieres vaciar el carrito?')) {
+          vaciarCarrito();
+          pintarCarrito();
+        }
+      });
+
+      document.querySelector('[data-pagar]').addEventListener('click', () => {
+        if (!Auth.estaAutenticado()) {
+          window.location.href = 'login.html?redirect=carrito';
+          return;
+        }
+
+        const resultado = crearOrdenDesdeCarrito(Auth.obtenerSesion());
+        if (!resultado.ok) {
+          alert(resultado.mensaje);
+          pintarCarrito();
+          return;
+        }
+
+        const aviso = document.querySelector('[data-orden-ok]');
+        aviso.textContent = `Compra registrada con el número ${resultado.orden.id}. `
+          + `Total: ${formatearCLP(resultado.orden.total)}.`;
+        aviso.classList.remove('d-none');
+        pintarCarrito();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    });
+  </script>
+
+</body>
+</html>

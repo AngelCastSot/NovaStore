@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Usuarios · Admin | NovaStore</title>
+  <link rel="icon" type="image/png" href="../../assets/img/marca/logo.png">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../../css/variables.css">
+  <link rel="stylesheet" href="../../css/brand-overrides.css">
+  <link rel="stylesheet" href="../../css/forms.css">
+  <link rel="stylesheet" href="../../css/tienda.css">
+  <link rel="stylesheet" href="../../css/admin.css">
+  <link rel="stylesheet" href="../../css/responsive.css">
+</head>
+<body>
+
+  <script>
+    window.RUTA_ASSETS_BASE = '../../assets/img/';
+    window.RUTA_TIENDA_BASE = '../../pages/tienda/';
+    window.RUTA_ADMIN_BASE = '../../pages/admin/';
+  </script>
+
+  <div class="layout-admin">
+    <nav class="admin-sidebar offcanvas-lg offcanvas-start" tabindex="-1" id="menuAdmin"
+      aria-label="Menú del administrador">
+      <div class="offcanvas-header d-lg-none">
+        <span class="fw-bold">Menú</span>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
+          data-bs-target="#menuAdmin" aria-label="Cerrar menú"></button>
+      </div>
+
+      <div class="offcanvas-body d-flex flex-column">
+        <a href="home.html" class="d-block mb-4">
+          <img src="../../assets/img/marca/logo-blanco.png" alt="NovaStore" style="height:44px;width:auto;">
+        </a>
+
+        <ul class="admin-sidebar__lista" data-menu-admin></ul>
+
+        <div class="mt-auto pt-4">
+          <p class="mb-2" data-usuario-admin></p>
+          <a href="../../index.html" class="d-block small mb-2">Ver la tienda</a>
+          <button type="button" class="btn btn-outline-light btn-sm w-100" data-salir>Cerrar sesión</button>
+        </div>
+      </div>
+    </nav>
+
+    <div class="admin-contenido">
+      <button class="btn btn-dark d-lg-none mb-3" type="button" data-bs-toggle="offcanvas"
+        data-bs-target="#menuAdmin" aria-controls="menuAdmin">&#9776; Menú</button>
+
+      <div class="admin-topbar">
+        <div>
+          <h1 class="h3 mb-1">Usuarios</h1>
+          <p class="mb-0 small">Mantenedor de las cuentas del sistema.</p>
+        </div>
+        <a href="usuario-form.html" class="btn btn-primary">Nuevo usuario</a>
+      </div>
+
+      <div class="row g-3 mb-4">
+        <div class="col-12 col-md-6 col-lg-4">
+          <label class="form-label fw-semibold" for="buscador">Buscar</label>
+          <input type="search" id="buscador" class="form-control" placeholder="RUN, nombre o correo">
+        </div>
+        <div class="col-12 col-md-6 col-lg-4">
+          <label class="form-label fw-semibold" for="filtroTipo">Tipo de usuario</label>
+          <select id="filtroTipo" class="form-select">
+            <option value="todos">Todos</option>
+            <option value="administrador">Administrador</option>
+            <option value="vendedor">Vendedor</option>
+            <option value="cliente">Cliente</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="table-responsive">
+        <table class="table align-middle bg-white">
+          <thead>
+            <tr>
+              <th scope="col">RUN</th>
+              <th scope="col">Nombre</th>
+              <th scope="col">Correo</th>
+              <th scope="col">Tipo</th>
+              <th scope="col">Región / Comuna</th>
+              <th scope="col">Acciones</th>
+            </tr>
+          </thead>
+          <tbody data-tabla-usuarios></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../../js/data/productos.js"></script>
+  <script src="../../js/data/regiones.js"></script>
+  <script src="../../js/data/blogs.js"></script>
+  <script src="../../js/utils/storage.js"></script>
+  <script src="../../js/utils/validaciones.js"></script>
+  <script src="../../js/utils/auth.js"></script>
+  <script src="../../js/utils/carrito.js"></script>
+  <script src="../../js/utils/ordenes.js"></script>
+  <script src="../../js/components/render-productos.js"></script>
+  <script src="../../js/components/admin-menu.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      inicializarProductos();
+      inicializarUsuarios();
+      Auth.protegerVistaAdmin();
+      Auth.protegerSoloAdministrador();
+      pintarMenuAdmin('usuarios');
+      aplicarPermisosEscritura();
+    });
+  </script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const buscador = document.getElementById('buscador');
+      const filtroTipo = document.getElementById('filtroTipo');
+
+      function nombreRegion(id) {
+        const region = REGIONES.find((item) => item.id === id);
+        return region ? region.nombre : '—';
+      }
+
+      function pintarUsuarios() {
+        const texto = buscador.value.trim().toLowerCase();
+        const sesion = Auth.obtenerSesion();
+        const todos = Storage.obtener(STORAGE_KEYS.USUARIOS, []);
+
+        const usuarios = todos.filter((item) => {
+          const coincideTexto = item.run.toLowerCase().includes(texto)
+            || (item.nombre + ' ' + (item.apellidos || '')).toLowerCase().includes(texto)
+            || item.correo.toLowerCase().includes(texto);
+          const coincideTipo = filtroTipo.value === 'todos' || item.tipoUsuario === filtroTipo.value;
+          return coincideTexto && coincideTipo;
+        });
+
+        document.querySelector('[data-tabla-usuarios]').innerHTML = usuarios.length
+          ? usuarios.map((item) => `
+              <tr>
+                <td>${item.run}</td>
+                <td>${item.nombre} ${item.apellidos || ''}</td>
+                <td>${item.correo}</td>
+                <td><span class="badge text-bg-light text-capitalize">${item.tipoUsuario}</span></td>
+                <td class="small">${nombreRegion(item.region)}${item.comuna ? ' / ' + item.comuna : ''}</td>
+                <td>
+                  <div class="admin-acciones-tabla">
+                    <a href="usuario-form.html?run=${item.run}" class="btn btn-outline-primary">Editar</a>
+                    <button type="button" class="btn btn-outline-danger" data-borrar="${item.run}"
+                      ${sesion && sesion.run === item.run ? 'disabled title="No puedes eliminar tu propia cuenta"' : ''}>
+                      Eliminar
+                    </button>
+                  </div>
+                </td>
+              </tr>`).join('')
+          : '<tr><td colspan="6" class="text-center py-4">No hay usuarios con esos filtros.</td></tr>';
+
+        document.querySelectorAll('[data-borrar]').forEach((boton) => {
+          boton.addEventListener('click', () => {
+            if (!confirm('¿Eliminar esta cuenta?')) return;
+            const run = boton.getAttribute('data-borrar');
+            Storage.guardar(STORAGE_KEYS.USUARIOS, todos.filter((item) => item.run !== run));
+            pintarUsuarios();
+          });
+        });
+      }
+
+      buscador.addEventListener('input', pintarUsuarios);
+      filtroTipo.addEventListener('change', pintarUsuarios);
+      pintarUsuarios();
+    });
+  </script>
+
+</body>
+</html>
