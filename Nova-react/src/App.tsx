@@ -1,25 +1,27 @@
-import { useState } from "react";
-import heroImg from "./assets/hero.png";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "./assets/vite.svg";
-import "bootstrap/dist/css/bootstrap.min.css";
+import { useState } from 'react';
+import Navbar from './components/Navbar';
+import Home from './pages/Home';
+import Productos from './pages/Productos';
+import Carrito from './pages/Carrito';
+import Login from './pages/Login';
+import Contacto from './pages/Contacto';
 
 function App() {
-  const [count, setCount] = useState(0);
+  // Estado que controla qué vista se muestra en pantalla
+  const [paginaActual, setPaginaActual] = useState('home');
 
   return (
-    <div className="card" style={{ width: "18rem" }}>
-      <img src="..." className="card-img-top" alt="..." />
-      <div className="card-body">
-        <h5 className="card-title">Card title</h5>
-        <p className="card-text">
-          Some quick example text to build on the card title and make up the
-          bulk of the card’s content.
-        </p>
-        <a href="#" className="btn btn-primary">
-          Go somewhere
-        </a>
-      </div>
+    <div>
+      {/* Le pasamos setPaginaActual al Navbar para que los botones cambien la vista */}
+      <Navbar cambiarPagina={setPaginaActual} paginaActual={paginaActual} />
+
+      <main>
+        {paginaActual === 'home' && <Home cambiarPagina={setPaginaActual} />}
+        {paginaActual === 'productos' && <Productos />}
+        {paginaActual === 'carrito' && <Carrito />}
+        {paginaActual === 'contacto' && <Contacto />}
+        {paginaActual === 'login' && <Login cambiarPagina={setPaginaActual} />}
+      </main>
     </div>
   );
 }
