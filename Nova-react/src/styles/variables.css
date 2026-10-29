@@ -1,0 +1,27 @@
+:root {
+  --color-bg: #F6F4EF;
+  --color-surface: #FFFFFF;
+  --color-ink: #1C2321;
+  --color-ink-muted: #5B6560;
+  --color-line: #DAD5C9;
+  --color-primary: #0F6E63;
+  --color-primary-dark: #0A4A42;
+  --color-accent: #E4572E;
+  --color-alerta-bg: #FBEAE5;
+  --color-alerta-texto: #B23A13;
+  --color-exito: #2E7D32;
+
+  --fuente-base: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+
+  --radio-sm: 2px;
+  --radio-md: 4px;
+
+  --espacio-1: 0.25rem;
+  --espacio-2: 0.5rem;
+  --espacio-3: 1rem;
+  --espacio-4: 1.5rem;
+  --espacio-5: 2.5rem;
+  --espacio-6: 4rem;
+
+  --ancho-maximo: 1180px;
+}

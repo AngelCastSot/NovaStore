@@ -1,0 +1,173 @@
+.admin-topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--espacio-4);
+  gap: var(--espacio-3);
+  flex-wrap: wrap;
+}
+
+.admin-kpis {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: var(--espacio-3);
+  margin-bottom: var(--espacio-5);
+}
+
+.admin-kpi {
+  background: var(--color-surface);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radio-md);
+  padding: var(--espacio-3);
+}
+
+.admin-kpi__valor {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--color-primary-dark);
+}
+
+.admin-kpi__label {
+  color: var(--color-ink-muted);
+  font-size: 0.85rem;
+}
+
+.admin-acciones-tabla {
+  display: flex;
+  gap: var(--espacio-2);
+}
+
+.admin-acciones-tabla a,
+.admin-acciones-tabla button {
+  font-size: 0.85rem;
+  padding: 0.35rem 0.7rem;
+}
+
+/* ---------- Menú vertical del panel ---------- */
+
+.layout-admin {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  align-items: start;
+}
+
+@media (max-width: 991.98px) {
+  .layout-admin {
+    grid-template-columns: 1fr;
+  }
+}
+
+.admin-sidebar {
+  background: var(--color-ink);
+  color: #E9E6DE;
+  padding: 0;
+}
+
+@media (min-width: 992px) {
+  .admin-sidebar {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+  }
+
+  .admin-sidebar .offcanvas-body {
+    padding: var(--espacio-4);
+  }
+
+  /* Bootstrap fuerza background-color/padding: transparent !important en
+     .offcanvas-lg a partir de 992px (para que el offcanvas se vea como un
+     bloque normal de la página). Como nuestro panel SÍ necesita fondo
+     oscuro fijo aquí, lo recuperamos con la misma prioridad. */
+  .admin-sidebar.offcanvas-lg {
+    background-color: var(--color-ink) !important;
+  }
+
+  .admin-sidebar.offcanvas-lg .offcanvas-body {
+    padding: var(--espacio-4) !important;
+    background-color: transparent !important;
+  }
+}
+
+@media (max-width: 991.98px) {
+  .admin-sidebar {
+    width: 280px;
+  }
+
+  .admin-sidebar .offcanvas-body {
+    padding: var(--espacio-4);
+  }
+}
+
+.admin-sidebar__lista {
+  list-style: none;
+  padding: 0;
+  margin: var(--espacio-4) 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-1);
+}
+
+.admin-sidebar__lista a {
+  display: block;
+  padding: var(--espacio-2) var(--espacio-3);
+  border-radius: var(--radio-md);
+  font-weight: 600;
+  color: #E9E6DE;
+}
+
+.admin-sidebar__lista a:hover,
+.admin-sidebar__lista a.activo {
+  background: var(--color-primary);
+  color: #fff;
+  text-decoration: none;
+}
+
+.admin-sidebar a {
+  color: #E9E6DE;
+}
+
+.admin-sidebar [data-usuario-admin] {
+  color: #E9E6DE;
+}
+
+.admin-sidebar [data-salir] {
+  --bs-btn-color: #1C2321;
+  --bs-btn-bg: #E9E6DE;
+  --bs-btn-border-color: #E9E6DE;
+  --bs-btn-hover-color: #1C2321;
+  --bs-btn-hover-bg: #fff;
+  --bs-btn-hover-border-color: #fff;
+  font-weight: 600;
+}
+
+.admin-contenido {
+  padding: var(--espacio-4);
+  min-width: 0;
+}
+
+@media (min-width: 992px) {
+  .admin-contenido {
+    padding: var(--espacio-5);
+  }
+}
+
+/* ---------- Imágenes dentro del panel ---------- */
+
+.admin-miniatura {
+  width: 52px;
+  height: 52px;
+  object-fit: cover;
+  border-radius: var(--radio-md);
+  border: 1px solid var(--color-line);
+  background: var(--color-bg);
+}
+
+.admin-previsualizacion {
+  width: 160px;
+  height: 160px;
+  object-fit: cover;
+  border-radius: var(--radio-md);
+  border: 1px solid var(--color-line);
+  background: var(--color-bg);
+}

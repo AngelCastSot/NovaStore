@@ -1,0 +1,146 @@
+:root,
+[data-bs-theme="light"] {
+  --bs-primary: #0F6E63;
+  --bs-primary-rgb: 15, 110, 99;
+  --bs-primary-text-emphasis: #0A4A42;
+  --bs-link-color: #0A4A42;
+  --bs-link-color-rgb: 10, 74, 66;
+  --bs-link-hover-color: #0F6E63;
+  --bs-body-bg: #F6F4EF;
+  --bs-body-color: #1C2321;
+  --bs-border-radius: 0.5rem;
+  --bs-border-radius-sm: 0.375rem;
+  --bs-border-radius-lg: 0.75rem;
+  --bs-font-sans-serif: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+.btn-primary {
+  --bs-btn-bg: #0F6E63;
+  --bs-btn-border-color: #0F6E63;
+  --bs-btn-hover-bg: #0A4A42;
+  --bs-btn-hover-border-color: #0A4A42;
+  --bs-btn-active-bg: #0A4A42;
+  --bs-btn-active-border-color: #0A4A42;
+  --bs-btn-focus-shadow-rgb: 15, 110, 99;
+  --bs-btn-disabled-bg: #0F6E63;
+  --bs-btn-disabled-border-color: #0F6E63;
+  font-weight: 600;
+}
+
+.btn-outline-primary {
+  --bs-btn-color: #0A4A42;
+  --bs-btn-border-color: #0A4A42;
+  --bs-btn-hover-bg: #0A4A42;
+  --bs-btn-hover-border-color: #0A4A42;
+  --bs-btn-active-bg: #0A4A42;
+  font-weight: 600;
+}
+
+.btn-danger {
+  --bs-btn-bg: #E4572E;
+  --bs-btn-border-color: #E4572E;
+  --bs-btn-hover-bg: #c94a24;
+  --bs-btn-hover-border-color: #c94a24;
+}
+
+.text-marca {
+  color: #0A4A42 !important;
+}
+
+.bg-marca {
+  background-color: #0F6E63 !important;
+}
+
+.navbar-brand__badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 0.375rem;
+  background: #0F6E63;
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.hero-marca {
+  background: linear-gradient(135deg, #0F6E63, #0A4A42);
+  color: #EAF4F1;
+  border-radius: 0.75rem;
+}
+
+.tarjeta-producto img {
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  background-color: #F6F4EF;
+}
+
+.footer-marca {
+  background-color: #1C2321;
+  color: #E9E6DE;
+}
+
+.footer-marca a {
+  color: #E9E6DE;
+}
+
+.link-boton {
+  background: none;
+  border: none;
+  padding: 0;
+  color: #0A4A42;
+  text-decoration: underline;
+  cursor: pointer;
+  font: inherit;
+}
+
+/* ---------- Logo de la marca ---------- */
+
+.navbar-brand__logo {
+  height: 40px;
+  width: auto;
+}
+
+.footer-marca__logo {
+  height: 48px;
+  width: auto;
+}
+
+.hero-marca__logo {
+  max-width: 70%;
+  height: auto;
+}
+
+/* ---------- Pie de página legible sobre fondo oscuro ---------- */
+
+.footer-marca p,
+.footer-marca .small {
+  color: #E9E6DE;
+}
+
+.footer-marca .text-body-secondary {
+  color: #C2C8C2 !important;
+}
+
+.footer-marca__copy {
+  color: #A9B0AA !important;
+}
+
+.footer-marca a:hover {
+  color: #FFFFFF;
+}
+
+/* ---------- Ilustraciones del blog y del equipo ---------- */
+
+.tarjeta-blog__imagen {
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  background-color: #F6F4EF;
+}
+
+.equipo-foto {
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  background-color: #E7EFEC;
+}

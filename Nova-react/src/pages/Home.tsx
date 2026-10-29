@@ -1,72 +1,68 @@
+import { Fragment } from "react/jsx-runtime";
+import Contenedor from "../components/Contenedor";
+import Tarjeta from "../components/Tarjeta";
+import { PRODUCTOS } from "../data/Producto";
+import { Link } from "react-router-dom";
+
 interface HomeProps {
   cambiarPagina: (pagina: string) => void;
 }
 
 function Home({ cambiarPagina }: HomeProps) {
   return (
-    <div className="container">
+    <Fragment>
       <section className="hero">
         <div className="hero-content">
           <span className="hero-tag">Simple, útil y moderno</span>
           <h1>Tecnología y accesorios pensados para tu rutina</h1>
           <p>
-            En NovaStore reunimos periféricos, audio, gadgets y equipamiento de escritorio con una navegación clara,
-            precios visibles en pesos chilenos y compras simples desde cualquier dispositivo.
+            En NovaStore reunimos periféricos, audio, gadgets y equipamiento de
+            escritorio con una navegación clara, precios visibles en pesos
+            chilenos y compras simples desde cualquier dispositivo.
           </p>
           <div className="hero-actions">
-            <button onClick={() => cambiarPagina('productos')} className="btn btn-primary">
-              Explorar catálogo
-            </button>
-            <button onClick={() => cambiarPagina('nosotros')} className="btn btn-secondary">
-              Conocer la tienda
+            <button
+              onClick={() => cambiarPagina("productos")}
+              className="btn btn-primary"
+            >
+              Ver todos los Productos
             </button>
           </div>
-          <div className="hero-stats">
-            <div className="stat">
-              <strong>+10</strong>
-              <span>productos listos para vitrina</span>
-            </div>
-            <div className="stat">
-              <strong>5</strong>
-              <span>categorías claras para filtrar</span>
-            </div>
-            <div className="stat">
-              <strong>100%</strong>
-              <span>responsive en móvil y escritorio</span>
-            </div>
-          </div>
+          <div className="hero-stats"></div>
         </div>
         <div className="hero-card">
-          <img src="/assets/img/productos/audifonos-nova-pulse.svg" alt="Audífonos Nova Pulse" />
+          <img src="/img/marca/logo.jpg" alt="Logo" />
         </div>
       </section>
+      <h3 className="text-center" style={{ margin: "15px" }}>
+        {" "}
+        Productos Destacados HOY
+      </h3>
 
-      <section className="section">
-        <div className="section-header">
-          <div>
-            <h2 className="section-title">Compra por categoría</h2>
-            <p className="section-subtitle">Explora las líneas principales de la tienda según tu necesidad.</p>
-          </div>
+      <Contenedor clase="container text-center">
+        <div className="row">
+          {/* Recorremos el arreglo de productos en Producto.ts
+              y para cada elemento (identificado auxiliarmente como 'prod')
+              va a generar la tarjeta del producto destacado con los datos
+              de prod */}
+          {PRODUCTOS.map((prod) => (
+            <div className="col">
+              <Tarjeta
+                titulo={prod.nombre}
+                texto={prod.descripcion}
+                urlImagen={prod.urlImagen}
+                altImagen={prod.altImagen}
+              >
+                <p className="card-text fw-bold">${prod.precio}</p>
+                <Link to={`/producto/${prod.id}`} className="btn btn-primary">
+                  +Info
+                </Link>
+              </Tarjeta>
+            </div>
+          ))}
         </div>
-        <div className="grid grid-3">
-          <article className="feature-box">
-            <div className="feature-icon">🎧</div>
-            <h3>Audio y uso diario</h3>
-            <p className="muted">Audífonos y parlantes compactos para estudiar, trabajar o moverte con comodidad.</p>
-          </article>
-          <article className="feature-box">
-            <div className="feature-icon">⌨️</div>
-            <h3>Escritorio y periféricos</h3>
-            <p className="muted">Teclados, mouse y accesorios ergonómicos para mejorar tu espacio de trabajo o juego.</p>
-          </article>
-          <article className="feature-box">
-            <div className="feature-icon">🏠</div>
-            <h3>Hogar inteligente y bienestar</h3>
-            <p className="muted">Iluminación, enchufes WiFi y wearables fáciles de integrar en el día a día.</p>
-          </article>
-        </div>
-      </section>
-    </div>
+      </Contenedor>
+    </Fragment>
   );
 }
 
