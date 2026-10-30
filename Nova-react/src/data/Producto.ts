@@ -16,7 +16,7 @@ export const PRODUCTOS: Producto[] = [
     descripcion:
       "Audifonos Inalámbricos con sonido envolvente y mas de 30 hora de bateria.",
     precio: "24990",
-    urlImagen: "img/productos/audifonos-nova-pulse.svg",
+    urlImagen: "img/productos/audifonos.webp",
     altImagen: "Audifonos inalambricos",
   },
   {
@@ -25,7 +25,7 @@ export const PRODUCTOS: Producto[] = [
     descripcion:
       "Parlante bluetooth resistente al agua, 12 horas de autonomia.",
     precio: "30990",
-    urlImagen: "img/poductos/parlante-orbe-mini.svg",
+    urlImagen: "img/productos/parlante.webp",
     altImagen: "Parlante portatil",
   },
   {
@@ -33,7 +33,7 @@ export const PRODUCTOS: Producto[] = [
     nombre: "Mouse Inalámbrico",
     descripcion: "Mouse Inalámbrico 2.4 ghz y bluetooth.",
     precio: "23990",
-    urlImagen: "img/productos/mouse-flux.svg",
+    urlImagen: "img/productos/mouse.jpg",
     altImagen: "Mouse inalambrico",
   },
   {
@@ -42,7 +42,7 @@ export const PRODUCTOS: Producto[] = [
     descripcion:
       "Teclado Mécanico con switches azules, RGB programable y layout español.",
     precio: "15990",
-    urlImagen: "img/productos/teclado-cascade.svg",
+    urlImagen: "img/productos/teclado.jpg",
     altImagen: "Teclado Mecanico",
   },
 ];

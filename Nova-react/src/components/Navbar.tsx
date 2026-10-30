@@ -1,3 +1,6 @@
+import { Link } from "react-router-dom";
+import { PAGINAS } from "../data/Paginas";
+
 interface NavbarProps {
   cambiarPagina: (pagina: string) => void;
   paginaActual: string;
@@ -5,7 +8,38 @@ interface NavbarProps {
 
 function Navbar({ cambiarPagina, paginaActual }: NavbarProps) {
   return (
-    <header className="site-header">
+    <nav className="navbar navbar-expand-lg bg-body-tertiary">
+      <div className="container-fluid">
+        <p className="navbar-brand">{paginaActual}</p>
+        <button
+          className="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span className="navbar-toggler-icon"></span>
+        </button>
+        <div className="collapse navbar-collapse" id="navbarNav">
+          <ul className="navbar-nav">
+            {PAGINAS.map((pag) => (
+              <li className="nav-item">
+                <Link
+                  className="nav-link"
+                  to={pag.ruta}
+                  onClick={() => cambiarPagina(pag.nombreCorto)}
+                >
+                  {pag.nombre}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </nav>
+    /*<header className="site-header">
       <div className="container navbar">
         <a
           href="#home"
@@ -70,7 +104,7 @@ function Navbar({ cambiarPagina, paginaActual }: NavbarProps) {
           </button>
         </div>
       </div>
-    </header>
+    </header>*/
   );
 }
 

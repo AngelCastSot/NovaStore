@@ -8,7 +8,7 @@ interface HomeProps {
   cambiarPagina: (pagina: string) => void;
 }
 
-function Home({ cambiarPagina }: HomeProps) {
+function Home({}: HomeProps) {
   return (
     <Fragment>
       <section className="hero">
@@ -21,12 +21,9 @@ function Home({ cambiarPagina }: HomeProps) {
             chilenos y compras simples desde cualquier dispositivo.
           </p>
           <div className="hero-actions">
-            <button
-              onClick={() => cambiarPagina("productos")}
-              className="btn btn-primary"
-            >
-              Ver todos los Productos
-            </button>
+            <Link to={`/productos`} className="btn btn-primary">
+              Ver todos los productos
+            </Link>
           </div>
           <div className="hero-stats"></div>
         </div>
@@ -38,13 +35,8 @@ function Home({ cambiarPagina }: HomeProps) {
         {" "}
         Productos Destacados HOY
       </h3>
-
       <Contenedor clase="container text-center">
         <div className="row">
-          {/* Recorremos el arreglo de productos en Producto.ts
-              y para cada elemento (identificado auxiliarmente como 'prod')
-              va a generar la tarjeta del producto destacado con los datos
-              de prod */}
           {PRODUCTOS.map((prod) => (
             <div className="col">
               <Tarjeta
@@ -55,7 +47,7 @@ function Home({ cambiarPagina }: HomeProps) {
               >
                 <p className="card-text fw-bold">${prod.precio}</p>
                 <Link to={`/producto/${prod.id}`} className="btn btn-primary">
-                  +Info
+                  Ver Producto
                 </Link>
               </Tarjeta>
             </div>
