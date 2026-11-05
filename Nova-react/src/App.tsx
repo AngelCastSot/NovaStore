@@ -133,12 +133,15 @@ function App() {
   }
 
   // Número que aparece en el globito rojo del carrito
-  const cantidadCarrito = carrito.reduce((total, item) => total + item.cantidad, 0);
+  const cantidadCarrito = carrito.reduce(
+    (total, item) => total + item.cantidad,
+    0,
+  );
 
   return (
     <BrowserRouter>
       <Routes>
-        {/* Rutas de la tienda: todas comparten Navbar + pie de página (LayoutTienda) */}
+        {/* Rutas de la tienda: todas comparten Navbar + pie de página */}
         <Route
           element={
             <LayoutTienda
@@ -148,7 +151,10 @@ function App() {
             />
           }
         >
-          <Route path="/" element={<Home agregarAlCarrito={agregarAlCarrito} />} />
+          <Route
+            path="/"
+            element={<Home agregarAlCarrito={agregarAlCarrito} />}
+          />
           <Route
             path="/productos"
             element={<Productos agregarAlCarrito={agregarAlCarrito} />}
@@ -169,7 +175,10 @@ function App() {
               />
             }
           />
-          <Route path="/login" element={<Login iniciarSesion={iniciarSesion} />} />
+          <Route
+            path="/login"
+            element={<Login iniciarSesion={iniciarSesion} />}
+          />
           <Route path="/registro" element={<Registro />} />
           <Route path="/contacto" element={<Contacto />} />
           <Route path="/nosotros" element={<Nosotros />} />
@@ -185,9 +194,18 @@ function App() {
           element={<LayoutAdmin sesion={sesion} cerrarSesion={cerrarSesion} />}
         >
           <Route index element={<AdminHome sesion={sesion} />} />
-          <Route path="productos" element={<AdminProductos sesion={sesion} />} />
-          <Route path="productos/nuevo" element={<AdminProductoForm sesion={sesion} />} />
-          <Route path="productos/:id" element={<AdminProductoDetalle sesion={sesion} />} />
+          <Route
+            path="productos"
+            element={<AdminProductos sesion={sesion} />}
+          />
+          <Route
+            path="productos/nuevo"
+            element={<AdminProductoForm sesion={sesion} />}
+          />
+          <Route
+            path="productos/:id"
+            element={<AdminProductoDetalle sesion={sesion} />}
+          />
           <Route
             path="productos/:id/editar"
             element={<AdminProductoForm sesion={sesion} />}
@@ -195,7 +213,10 @@ function App() {
           <Route path="ordenes" element={<AdminOrdenes />} />
           <Route path="ordenes/:id" element={<AdminOrdenDetalle />} />
           <Route path="usuarios" element={<AdminUsuarios sesion={sesion} />} />
-          <Route path="usuarios/nuevo" element={<AdminUsuarioForm sesion={sesion} />} />
+          <Route
+            path="usuarios/nuevo"
+            element={<AdminUsuarioForm sesion={sesion} />}
+          />
           <Route
             path="usuarios/:run/editar"
             element={<AdminUsuarioForm sesion={sesion} />}
