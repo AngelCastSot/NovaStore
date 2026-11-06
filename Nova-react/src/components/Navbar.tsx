@@ -14,13 +14,16 @@ function Navbar({ cantidadCarrito, sesion, cerrarSesion }: Props) {
   // En celulares el menú está plegado; este estado dice si está abierto o cerrado
   const [menuAbierto, setMenuAbierto] = useState(false);
 
+  // La primera página de PAGINAS es "Inicio": la usamos también para el logo
+  const inicio = PAGINAS[0];
+
   return (
     <header className="navbar navbar-expand-lg bg-white shadow-sm sticky-top py-3">
       <div className="container">
         <Link
-          to="/"
+          to={inicio.ruta}
           className="navbar-brand d-flex align-items-center gap-2 fw-bold"
-          aria-label="NovaStore, ir al inicio"
+          aria-label={"NovaStore, ir a " + inicio.nombre.toLowerCase()}
         >
           <img
             src="/img/marca/logo.png"
@@ -39,7 +42,9 @@ function Navbar({ cantidadCarrito, sesion, cerrarSesion }: Props) {
         </Boton>
 
         {/* La clase "show" es la que hace visible el menú plegado */}
-        <div className={"collapse navbar-collapse" + (menuAbierto ? " show" : "")}>
+        <div
+          className={"collapse navbar-collapse" + (menuAbierto ? " show" : "")}
+        >
           <ul className="navbar-nav mx-auto gap-lg-3 text-center">
             {/* Un <li> por cada página del arreglo PAGINAS */}
             {PAGINAS.map((pagina) => (
